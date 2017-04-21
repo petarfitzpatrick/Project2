@@ -1,98 +1,86 @@
 "use strict";
 
-var domoRenderer = void 0; //Domo Renderer component
-var domoForm = void 0; //Domo Add Form Render Component
-var DomoFormClass = void 0; //Domo Form React UI class
-var DomoListClass = void 0; //Domo List React UI class
+var postRenderer = void 0;
+var postForm = void 0;
+var PostFormClass = void 0;
+var PostListClass = void 0;
 
-var handleDomo = function handleDomo(e) {
+var handlePost = function handlePost(e) {
 
   e.preventDefault();
 
-  $("#domoMessage").animate({ width: 'hide' }, 350);
+  $("#postMessage").animate({ width: 'hide' }, 350);
 
-  if ($("#domoName").val() == '' || $("#domoAge").val() == '') {
-    handleError("RAWR! All fields are required");
+  if ($("#postName").val() == '' || $("#postContents").val() == '') {
+    handleError("All fields are required");
     return false;
   }
 
-  sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function () {
-    domoRenderer.loadDomosFromServer();
+  sendAjax('POST', $("#postForm").attr("action"), $("#postForm").serialize(), function () {
+    postRenderer.loadPostsFromServer();
   });
 
   return false;
 };
 
-var renderDomo = function renderDomo() {
+var renderPost = function renderPost() {
   return React.createElement(
     "form",
-    { id: "domoForm",
+    { id: "postForm",
       onSubmit: this.handleSubmit,
-      name: "domoForm",
+      name: "postForm",
       action: "/maker",
       method: "POST",
-      className: "domoForm"
+      className: "postForm"
     },
     React.createElement(
       "label",
       { htmlFor: "name" },
       "Name: "
     ),
-    React.createElement("input", { id: "domoName", type: "text", name: "name", placeholder: "Domo Name" }),
+    React.createElement("input", { id: "postName", type: "text", name: "name", placeholder: "Post Name" }),
+    React.createElement("p", null),
     React.createElement(
       "label",
-      { htmlFor: "age" },
-      "Age: "
+      { htmlFor: "contents" },
+      "Contents: "
     ),
-    React.createElement("input", { id: "domoAge", type: "text", name: "age", placeholder: "Domo Age" }),
-    React.createElement(
-      "label",
-      { htmlFor: "personality" },
-      "Personality: "
-    ),
-    React.createElement("input", { id: "domoPersonality", type: "text", name: "personality", placeholder: "Domo Personality" }),
+    React.createElement("input", { id: "postContents", type: "text", name: "contents", placeholder: "Post Contents" }),
+    React.createElement("p", null),
     React.createElement("input", { type: "hidden", name: "_csrf", value: this.props.csrf }),
-    React.createElement("input", { className: "makeDomoSubmit", type: "submit", value: "Make Domo" })
+    React.createElement("input", { className: "makePostSubmit", type: "submit", value: "Make Post" })
   );
 };
 
-var renderDomoList = function renderDomoList() {
+var renderPostList = function renderPostList() {
   if (this.state.data.length === 0) {
     return React.createElement(
       "div",
-      { className: "domoList" },
+      { className: "postList" },
       React.createElement(
         "h3",
-        { className: "emptyDomo" },
-        "No Domos yet"
+        { className: "emptyPost" },
+        "No Posts yet"
       )
     );
   }
 
-  var domoNodes = this.state.data.map(function (domo) {
+  var postNodes = this.state.data.map(function (post) {
     return React.createElement(
       "div",
-      { key: domo._id, className: "domo" },
-      React.createElement("img", { src: "/assets/img/domoface.jpeg", alt: "domo face", className: "domoFace" }),
+      { key: post._id, className: "post" },
       React.createElement(
         "h3",
-        { className: "domoName" },
+        { className: "postName" },
         " Name: ",
-        domo.name,
+        post.name,
         " "
       ),
       React.createElement(
         "h3",
-        { className: "domoAge" },
-        " Age: ",
-        domo.age,
-        " "
-      ),
-      React.createElement(
-        "h3",
-        { className: "domoPersonality" },
-        " Personality: ",
-        domo.personality,
+        { className: "postContents" },
+        " Body: ",
+        post.contents,
         " "
       )
     );
@@ -100,39 +88,39 @@ var renderDomoList = function renderDomoList() {
 
   return React.createElement(
     "div",
-    { className: "domoList" },
-    domoNodes
+    { className: "postList" },
+    postNodes
   );
 };
 
 var setup = function setup(csrf) {
-  DomoFormClass = React.createClass({
-    displayName: "DomoFormClass",
+  PostFormClass = React.createClass({
+    displayName: "PostFormClass",
 
-    handleSubmit: handleDomo,
-    render: renderDomo
+    handleSubmit: handlePost,
+    render: renderPost
   });
 
-  DomoListClass = React.createClass({
-    displayName: "DomoListClass",
+  PostListClass = React.createClass({
+    displayName: "PostListClass",
 
-    loadDomosFromServer: function loadDomosFromServer() {
-      sendAjax('GET', '/getDomos', null, function (data) {
-        this.setState({ data: data.domos });
+    loadPostsFromServer: function loadPostsFromServer() {
+      sendAjax('GET', '/getPosts', null, function (data) {
+        this.setState({ data: data.posts });
       }.bind(this));
     },
     getInitialState: function getInitialState() {
       return { data: [] };
     },
     componentDidMount: function componentDidMount() {
-      this.loadDomosFromServer();
+      this.loadPostsFromServer();
     },
-    render: renderDomoList
+    render: renderPostList
   });
 
-  domoForm = ReactDOM.render(React.createElement(DomoFormClass, { csrf: csrf }), document.querySelector("#makeDomo"));
+  postForm = ReactDOM.render(React.createElement(PostFormClass, { csrf: csrf }), document.querySelector("#makePost"));
 
-  domoRenderer = ReactDOM.render(React.createElement(DomoListClass, null), document.querySelector("#domos"));
+  postRenderer = ReactDOM.render(React.createElement(PostListClass, null), document.querySelector("#posts"));
 };
 
 var getToken = function getToken() {
@@ -148,11 +136,11 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#domoMessage").animate({ width: 'toggle' }, 350);
+  $("#postMessage").animate({ width: 'toggle' }, 350);
 };
 
 var redirect = function redirect(response) {
-  $("#domoMessage").animate({ width: 'hide' }, 350);
+  $("#postMessage").animate({ width: 'hide' }, 350);
   window.location = response.redirect;
 };
 

@@ -17,7 +17,7 @@ html, body {
 nav {
     width: 100%;
     height: 50px;
-    background-color: #55acee;
+    background-color: #F62459;
 }
 
 nav:nth-child(1) {
@@ -38,57 +38,61 @@ nav:nth-child(1) {
     text-decoration: none;
     padding: 5px;
     border-radius: 4px;
-    background-color: #55acee;
+    background-color: #F62459;
     transition: background-color 0.4s ease;
 }
 
 .navlink a:hover {
     transition: background-color 0.8s ease;
-    background-color: #66bdff;
+    background-color: #E26A6A;
 }
 
-.domoForm {
-    border: 2px solid #338acc;
-    height: 35px;
-    width: 960px;
+.postForm {
+    border: 2px solid #F62459;
+    width: 500px;
     margin-top:0px;
     padding-top:10px;
-    background-color: #55acee;
+    background-color: #F62459;
     border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
+    padding: 6px;
 }
 
-.domoForm label {
+.postForm label {
     display: inline-block;
     width: 75px;
     margin-left: 10px;
     font-size: 1.2em;
-    float: left;
+
     color: white;
 }
 
-.domoForm input[type=text] {
-    float:left;
+#postContents{
+    width: 80%;
+    height: 60px;
+}
+
+.postForm input[type=text] {
+
     margin-left: 18px;
 }
 
-.makeDomoSubmit {
+.makePostSubmit {
     transition: background-color 0.4s ease;
     display: inline;
     width: 90px;
-    background-color: #55acee;
+    background-color: #E26A6A;
     border-radius: 2px;
     color: white;
     text-decoration: none;
 }
 
-.makeDomoSubmit:link, .makeDomoSubmit:visited, .makeDomoSubmit:hover, .makeDomoSubmit:active {
+.makePostSubmit:link, .makePostSubmit:visited, .makePostSubmit:hover, .makePostSubmit:active {
     color: white;
 }
 
-.makeDomoSubmit:hover {
+.makePostSubmit:hover {
     transition: background-color 0.4s ease;
-    background-color: #338acc;
+    background-color: #F62459;
 }
 
 .mainForm {
@@ -148,7 +152,7 @@ nav:nth-child(1) {
     box-shadow: 0px 0px 1px 1px #55acee;
 }
 
-#domoMessage {
+#postMessage {
     display:none;
     top: 250px;
     width: 250px;
@@ -159,7 +163,7 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-#domoMessage h3 {
+#postMessage h3 {
     width: 200px;
     position: absolute;
     top: 0px;
@@ -179,7 +183,7 @@ nav:nth-child(1) {
     font-style: italic;
 }
 
-#domo {
+#post {
     z-index: 225;
     margin-top: -20px;
     margin-left: 135px;
@@ -190,33 +194,31 @@ nav:nth-child(1) {
     transform: rotate(330deg);
 }
 
-#domos {
-    width: 40%;
+#posts {
+    width: 80%;
     min-width: 400px;
-    border: 2px solid #55acee;
-    border-radius: 4px;
     margin: 0 auto;
     margin-top: 100px;
 }
 
-.domo {
+.post {
     width: 95%;
     margin: 0 auto;
     margin-top: 2px;
     margin-bottom: 2px;
-    border: 2px solid #55acee;
+    border: 2px solid white;
     border-radius: 4px;
-    background-color: #55acee;
+    background-color: #E26A6A;
     padding: 10px;
     min-height:60px;
     overflow: hidden;
 }
 
-.domo:hover {
+.post:hover {
     transition: border-color 0.2s ease-out;
     border-color: rgba(255,255,255, 0.8);
     transition: background-color 2.6s ease-out;
-    background-color: #66bfff;
+    background-color: #F62459;
 }
 
 img.domoFace {
@@ -229,7 +231,7 @@ img.domoFace {
     float:left;
 }
 
-h3.emptyDomo {
+h3.emptyPost {
     width: 400px;
     font-size: 1.5em;
     margin: 0 auto;
@@ -237,37 +239,27 @@ h3.emptyDomo {
     margin-top: 18px;
 }
 
-h3.domoName {
-    float:left;
+h3.postName {
     width: 200px;
     font-weight: bold;
-    padding-left: 65px;
+    padding-left: 6px;
     font-size: 1.5em;
 }
 
-h3.domoAge {
-    float:right;
-    text-align: right;
-    width: 100px;
-    font-weight: bold;
-    padding-right: 40px;
-    font-size: 1.5em;
-}
-
-h3.domoPersonality {
+div.postContents {
+    padding-left: 6px;
     margin-top: 0px;
-    float:right;
-    text-align: right;
-    width: 300px;
-    font-weight: bold;
+    text-align: left;
+    width: 100%;
     padding-right: 40px;
-    font-size: 1.5em;
+    font-size: 1.2em;
+    padding: 10px;
 }
 
-.domo:first-child {
+.post:first-child {
     margin-top: 10px;
 }
 
-.domo:last-child {
+.post:last-child {
     margin-bottom:10px;
 }

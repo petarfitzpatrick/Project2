@@ -1,101 +1,99 @@
-let domoRenderer; //Domo Renderer component
-let domoForm; //Domo Add Form Render Component
-let DomoFormClass; //Domo Form React UI class
-let DomoListClass; //Domo List React UI class
+let postRenderer;
+let postForm;
+let PostFormClass;
+let PostListClass;
 
-const handleDomo = (e) => {
+const handlePost = (e) => {
 
   e.preventDefault();
 
-  $("#domoMessage").animate({width:'hide'},350);
+  $("#postMessage").animate({width:'hide'},350);
 
-  if($("#domoName").val() == '' || $("#domoAge").val() == '') {
-    handleError("RAWR! All fields are required");
+  if($("#postName").val() == '' || $("#postContents").val() == '') {
+    handleError("All fields are required");
     return false;
   }
 
-  sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function() {
-    domoRenderer.loadDomosFromServer();
+  sendAjax('POST', $("#postForm").attr("action"), $("#postForm").serialize(), function() {
+    postRenderer.loadPostsFromServer();
   });
 
   return false;
 };
 
-const renderDomo = function() {
+const renderPost = function() {
   return (
-    <form id="domoForm"
+    <form id="postForm"
       onSubmit={this.handleSubmit}
-      name="domoForm"
+      name="postForm"
       action="/maker"
       method="POST"
-      className="domoForm"
+      className="postForm"
     >
       <label htmlFor="name">Name: </label>
-      <input id="domoName" type="text" name="name" placeholder="Domo Name"/>
-      <label htmlFor="age">Age: </label>
-      <input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
-      <label htmlFor="personality">Personality: </label>
-      <input id="domoPersonality" type="text" name="personality" placeholder="Domo Personality"/>
+      <input id="postName" type="text" name="name" placeholder="Post Name"/>
+      <p></p>
+      <label htmlFor="contents">Contents: </label>
+      <input id="postContents" type="text" name="contents" placeholder="Post Contents"/>
+      <p></p>
       <input type="hidden" name="_csrf" value={this.props.csrf} />
-      <input className="makeDomoSubmit" type="submit" value="Make Domo" />
+      <input className="makePostSubmit" type="submit" value="Make Post" />
     </form>
   );
 };
 
-const renderDomoList = function() {
+const renderPostList = function() {
   if(this.state.data.length === 0) {
     return (
-      <div className="domoList">
-        <h3 className="emptyDomo">No Domos yet</h3>
+      <div className="postList">
+        <h3 className="emptyPost">No Posts yet</h3>
       </div>
     );
   }
 
-  const domoNodes = this.state.data.map(function(domo) {
+  const postNodes = this.state.data.map(function(post) {
     return (
-      <div key={domo._id} className="domo">
-        <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-        <h3 className="domoName"> Name: {domo.name} </h3>
-        <h3 className="domoAge"> Age: {domo.age} </h3>
-        <h3 className="domoPersonality"> Personality: {domo.personality} </h3>
+      <div key={post._id} className="post">
+        <h3 className="postName"> Name: {post.name} </h3>
+        <h3 className="postContents"> Body: {post.contents} </h3>
       </div>
     );
   });
 
   return (
-    <div className="domoList">
-      {domoNodes}
+    <div className="postList">
+      {postNodes}
     </div>
   );
 };
 
 const setup = function(csrf) {
-  DomoFormClass = React.createClass({
-    handleSubmit: handleDomo,
-    render: renderDomo,
+  PostFormClass = React.createClass({
+    handleSubmit: handlePost,
+    render: renderPost,
   });
 
-  DomoListClass = React.createClass({
-    loadDomosFromServer: function() {
-      sendAjax('GET', '/getDomos', null, function(data) {
-        this.setState({data:data.domos});
+  PostListClass = React.createClass({
+    loadPostsFromServer: function() {
+      sendAjax('GET', '/getPosts', null, function(data) {
+        this.setState({data:data.posts});
       }.bind(this));
     },
     getInitialState: function () {
       return {data: []};
     },
     componentDidMount: function () {
-      this.loadDomosFromServer();
+      this.loadPostsFromServer();
     },
-    render: renderDomoList
+    render: renderPostList
   });
 
-  domoForm = ReactDOM.render(
-    <DomoFormClass csrf={csrf} />, document.querySelector("#makeDomo")
+  postForm = ReactDOM.render(
+    <PostFormClass csrf={csrf} />, document.querySelector("#makePost")
   );
 
-  domoRenderer = ReactDOM.render(
-    <DomoListClass />, document.querySelector("#domos")
+  postRenderer = ReactDOM.render(
+    <PostListClass />, document.querySelector("#posts")
   );
 };
 

@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>DomoMaker</title>
+  <title>Group Post</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
@@ -11,19 +11,17 @@
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
-  <nav><a href="/login"><img id="logo" src="/assets/img/face.png" alt="face logo"/></a>
+  <nav><a href="/login"><img id="logo" src="/assets/img/home.png" alt="home logo"/></a>
     <div class="navlink"><a href="/logout">Log out</a></div>
     <div class="navlink"><a href="/maker">Maker</a></div>
   </nav>
-  <section id="domos">
-      {{#domos}}
-        <div key={{_id}} class="domo">
-            <img src="/assets/img/domoface.jpeg" alt="domo face" class="domoFace" />
-            <h3 class="domoName"> Name: {{name}} </h3>
-            <h3 class="domoAge"> Age: {{age}} </h3>
-            <h3 class="domoPersonality"> Personality: {{personality}} </h3>
+  <section id="posts">
+      {{#posts}}
+        <div key={{_id}} class="post">
+            <h3 class="postName"> Name: {{name}} </h3>
+            <div class="postContents"> {{contents}} </div>
         </div>
-      {{/domos}}
+      {{/posts}}
   </section>
   <script src="/assets/rosterBundle.js"></script>
 </body>
