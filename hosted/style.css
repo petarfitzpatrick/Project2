@@ -4,6 +4,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
 }
 
 #logo {
@@ -62,7 +63,6 @@ nav:nth-child(1) {
     width: 75px;
     margin-left: 10px;
     font-size: 1.2em;
-
     color: white;
 }
 
@@ -123,21 +123,21 @@ nav:nth-child(1) {
     margin-top: 14px;
     font-size: 1.2em;
     width: 100px;
-    background-color: #55acee;
+    background-color: #F62459;
     border-radius: 2px;
-    border-color: #66acee;
+    border-color: #F62459;
     padding: 3px 0px;
     color: white;
     text-decoration: none;
 }
 
 .formSubmit:link, .formSubmit:visited, .formSubmit:hover, .formSubmit:active {
-    color: white;
+    background-color: white;
 }
 
 .formSubmit:hover {
     transition: background-color 0.4s ease;
-    background-color: #338acc;
+    background-color: #E26A6A;
 }
 
 #user, #pass, #pass2 {
@@ -214,13 +214,6 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-.post:hover {
-    transition: border-color 0.2s ease-out;
-    border-color: rgba(255,255,255, 0.8);
-    transition: background-color 2.6s ease-out;
-    background-color: #F62459;
-}
-
 img.domoFace {
     margin-left: 25px;
     margin-right: 10px;
@@ -241,9 +234,10 @@ h3.emptyPost {
 
 h3.postName {
     width: 200px;
+    color: white;
     font-weight: bold;
     padding-left: 6px;
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 div.postContents {
@@ -262,4 +256,17 @@ div.postContents {
 
 .post:last-child {
     margin-bottom:10px;
+}
+
+.account{
+    text-align: center;
+}
+.account label{
+    font-size: 1.2em;
+}
+
+.account input{
+    text-align: center;
+    margin-bottom: 1em;
+    font-size: 1em;
 }

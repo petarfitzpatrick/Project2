@@ -27,10 +27,31 @@ var renderEditForm = function renderEditForm() {
     return React.createElement(
       "div",
       { key: account._id, className: "account" },
-      React.createElement("input", { id: "accountName", type: "text", name: "username", defaultValue: account.username, placeholder: "Username" }),
+      React.createElement("input", { id: "accountName", type: "text", name: "username", defaultValue: account.username, style: { display: 'none' } }),
+      React.createElement(
+        "label",
+        null,
+        "Current Password"
+      ),
+      React.createElement("br", null),
       React.createElement("input", { id: "currentPass", type: "password", name: "currentPass", placeholder: "Current Password" }),
+      React.createElement("br", null),
+      React.createElement(
+        "label",
+        null,
+        "New Password"
+      ),
+      React.createElement("br", null),
       React.createElement("input", { id: "newPass", type: "password", name: "newPass", placeholder: "New Password" }),
-      React.createElement("input", { id: "newPass2", type: "password", name: "newPass2", placeholder: "Retype New Password" }),
+      React.createElement("br", null),
+      React.createElement(
+        "label",
+        null,
+        "Confirm Password"
+      ),
+      React.createElement("br", null),
+      React.createElement("input", { id: "newPass2", type: "password", name: "newPass2", placeholder: "New Password" }),
+      React.createElement("br", null),
       React.createElement("input", { className: "formSubmit", type: "submit", value: "Save" })
     );
   });

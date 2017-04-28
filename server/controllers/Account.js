@@ -80,20 +80,18 @@ const signup = (request, response) => {
 
 const changePass = (request, response) => {
   response.render('changePass', { csrfToken: request.csrfToken() });
-}
+};
 
 const updatePassword = (request, response) => {
   const username = `${request.body.username}`;
   const password = `${request.body.currentPass}`;
 
   return Account.AccountModel.authenticate(username, password, (err, account) => {
-    if (err || !account){
-      return response.status(401).json({ error: 'Wrong combo'});
+    if (err || !account) {
+      return response.status(401).json({ error: 'Wrong combo' });
     }
 
     const updatedAccount = account;
-
-console.log("Yeah");
 
     return Account.AccountModel.generateHash(request.body.newPass, (salt, hash) => {
       updatedAccount.password = hash;
@@ -101,16 +99,16 @@ console.log("Yeah");
 
       const savePromise = updatedAccount.save();
 
-      savePromise.then(() => response.json({saveErrr}));
+      savePromise.then(() => response.json({ err }));
 
-      return response.json({ redirect: '/login'});
+      return response.json({ redirect: '/login' });
     });
   });
-}
+};
 
 const getAccountInfo = (request, response) => {
-  response.json({account: request.session.account})
-}
+  response.json({ account: request.session.account });
+};
 
 const getToken = (request, response) => {
   const req = request;

@@ -24,10 +24,19 @@ const renderEditForm = function () {
   const renderFormData = this.state.data.map(function(account) {
     return (
       <div key={account._id} className="account">
-        <input id="accountName" type="text" name="username" defaultValue={account.username} placeholder="Username"/>
+        <input id="accountName" type="text" name="username" defaultValue={account.username} style={{display: 'none'}}/>
+        <label>Current Password</label>
+        <br/>
         <input id="currentPass" type="password" name="currentPass" placeholder="Current Password"/>
+        <br/>
+        <label>New Password</label>
+        <br/>
         <input id="newPass" type="password" name="newPass" placeholder="New Password"/>
-        <input id="newPass2" type="password" name="newPass2" placeholder="Retype New Password"/>
+        <br/>
+        <label>Confirm Password</label>
+        <br/>
+        <input id="newPass2" type="password" name="newPass2" placeholder="New Password"/>
+        <br/>
         <input className="formSubmit" type="submit" value="Save" />
       </div>
     );

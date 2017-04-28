@@ -44,16 +44,18 @@ const makerPage = (req, res) => {
   });
 };
 
-const rosterPage = (req, res) => {
-  Post.PostModel.findByBoard('general', (err, docs) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({ error: 'An error occurred' });
-    }
-    console.log(docs);
-    return res.render('roster', { csrfToken: req.csrfToken(), posts: docs });
-  });
-};
+const rosterPage = (req, res) => res.render('roster', { csrfToken: req.csrfToken() });
+
+const getAllPosts = (req, res) => Post.PostModel.findByBoard('general', (err, docs) => {
+  if (err) {
+    console.log(err);
+    return res.status(400).json({ error: 'An error occurred' });
+  }
+  console.log(docs);
+  return res.json({ posts: docs });
+});
+
+const privatePage = (req, res) => res.render('private', { csrfToken: req.csrfToken() });
 
 const getPosts = (request, response) => {
   const req = request;
@@ -71,5 +73,7 @@ const getPosts = (request, response) => {
 
 module.exports.makerPage = makerPage;
 module.exports.rosterPage = rosterPage;
+module.exports.privatePage = privatePage;
 module.exports.getPosts = getPosts;
+module.exports.getAllPosts = getAllPosts;
 module.exports.make = makePost;

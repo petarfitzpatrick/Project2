@@ -54,8 +54,7 @@ const renderPostList = function() {
   const postNodes = this.state.data.map(function(post) {
     return (
       <div key={post._id} className="post">
-        <h3 className="postName"> Name: {post.name} </h3>
-        <h3 className="postContents"> Body: {post.contents} </h3>
+        <h3 className="postName"> {post.name} </h3>
       </div>
     );
   });

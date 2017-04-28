@@ -72,15 +72,8 @@ var renderPostList = function renderPostList() {
       React.createElement(
         "h3",
         { className: "postName" },
-        " Name: ",
+        " ",
         post.name,
-        " "
-      ),
-      React.createElement(
-        "h3",
-        { className: "postContents" },
-        " Body: ",
-        post.contents,
         " "
       )
     );

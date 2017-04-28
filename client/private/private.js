@@ -16,6 +16,7 @@ const renderPostList = function() {
     return (
       <div key={post._id} className="post">
         <h3 className="postName"> {post.name} </h3>
+        <h3 className="postContents"> {post.contents} </h3>
       </div>
     );
   });
@@ -31,7 +32,7 @@ const setup = function(csrf) {
 
   PostListClass = React.createClass({
     loadPostsFromServer: function() {
-      sendAjax('GET', '/getAllPosts', null, function(data) {
+      sendAjax('GET', '/getPosts', null, function(data) {
         this.setState({data:data.posts});
       }.bind(this));
     },

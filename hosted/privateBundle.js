@@ -28,6 +28,13 @@ var renderPostList = function renderPostList() {
         " ",
         post.name,
         " "
+      ),
+      React.createElement(
+        "h3",
+        { className: "postContents" },
+        " ",
+        post.contents,
+        " "
       )
     );
   });
@@ -45,7 +52,7 @@ var setup = function setup(csrf) {
     displayName: "PostListClass",
 
     loadPostsFromServer: function loadPostsFromServer() {
-      sendAjax('GET', '/getAllPosts', null, function (data) {
+      sendAjax('GET', '/getPosts', null, function (data) {
         this.setState({ data: data.posts });
       }.bind(this));
     },
