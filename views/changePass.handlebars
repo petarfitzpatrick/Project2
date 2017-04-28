@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Group Post</title>
+  <title>DomoMaker</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
@@ -13,16 +13,15 @@
 <body>
   <nav><a href="/login"><img id="logo" src="/assets/img/home.png" alt="home logo"/></a>
     <div class="navlink"><a href="/logout">Log out</a></div>
-    <div class="navlink"><a href="/changePass">Change Password</a></div>
+    <div class="navlink"><a href="/maker">Maker</a></div>
     <div class="navlink"><a href="/roster">Everybody</a></div>
   </nav>
-  <section id="makePost">
-  </section>
-  <section id="posts">
-  </section>
-  <div id="postMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
-    <h3><span id="errorMessage"></span></h3><img id="domo" src="assets/img/domo.png" alt="domo"/>
+  <section id="content"></section>
+  <div id="changeForm">
   </div>
-  <script src="/assets/bundle.js"></script>
+  <div id="postMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
+    <h3><span id="errorMessage">Wrong username or password</span></h3><img id="domo" src="assets/img/domo.png" alt="domo"/>
+  </div>
+  <script src="/assets/passBundle.js"></script>
 </body>
 </html>
