@@ -5,20 +5,24 @@ html, body {
     padding: 0;
     overflow-x: hidden;
     font-family: 'Roboto', sans-serif;
+    background-color: #F5E9BE;
 }
 
 #logo {
     height: 40px;
     width: 40;
     padding-top: 5px;
+    padding-left: 5px;
     float:left;
     border-radius: 8px;
 }
 
 nav {
-    width: 100%;
+    width: 80%;
+    max-width: 1260px;
     height: 50px;
-    background-color: #F62459;
+    background-color: #174C4F;
+    margin: auto;
 }
 
 nav:nth-child(1) {
@@ -39,23 +43,28 @@ nav:nth-child(1) {
     text-decoration: none;
     padding: 5px;
     border-radius: 4px;
-    background-color: #F62459;
+    background-color: #174C4F;
     transition: background-color 0.4s ease;
 }
 
 .navlink a:hover {
-    transition: background-color 0.8s ease;
-    background-color: #E26A6A;
+    transition: color 0.8s ease;
+    color: #FF9666;
 }
 
 .postForm {
-    border: 2px solid #F62459;
-    width: 500px;
+    border: 2px solid #174C4F;
+    width: 300px;
     margin-top:0px;
     padding-top:10px;
-    background-color: #F62459;
+    background-color: #174C4F;
     border-bottom-right-radius: 4px;
     padding: 6px;
+    width: 80%;
+    max-width: 1260px;
+    position: relative;
+    margin: auto;
+    top: 2px;
 }
 
 .postForm label {
@@ -63,17 +72,17 @@ nav:nth-child(1) {
     width: 75px;
     margin-left: 10px;
     font-size: 1.2em;
+    margin-right: 20px;
     color: white;
 }
 
 #postContents{
-    width: 80%;
-    height: 60px;
+    width: 85%;
+    height: 90px;
 }
 
 .postForm input[type=text] {
-
-    margin-left: 18px;
+    
 }
 
 .makePostSubmit {
@@ -92,7 +101,7 @@ nav:nth-child(1) {
 
 .makePostSubmit:hover {
     transition: background-color 0.4s ease;
-    background-color: #F62459;
+    background-color: #174C4F;
 }
 
 .mainForm {
@@ -123,9 +132,9 @@ nav:nth-child(1) {
     margin-top: 14px;
     font-size: 1.2em;
     width: 100px;
-    background-color: #F62459;
+    background-color: #174C4F;
     border-radius: 2px;
-    border-color: #F62459;
+    border-color: #174C4F;
     padding: 3px 0px;
     color: white;
     text-decoration: none;
@@ -196,32 +205,20 @@ nav:nth-child(1) {
 
 #posts {
     width: 80%;
+    max-width: 1260px;
     min-width: 400px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 25px;
 }
 
 .post {
-    width: 95%;
     margin: 0 auto;
     margin-top: 2px;
     margin-bottom: 2px;
-    border: 2px solid white;
-    border-radius: 4px;
-    background-color: #E26A6A;
+    background-color: #FF9666;
     padding: 10px;
     min-height:60px;
     overflow: hidden;
-}
-
-img.domoFace {
-    margin-left: 25px;
-    margin-right: 10px;
-    height: 50px;
-    width: 50px;
-    border-radius: 4px;
-    margin-top:10px;
-    float:left;
 }
 
 h3.emptyPost {
@@ -238,6 +235,11 @@ h3.postName {
     font-weight: bold;
     padding-left: 6px;
     font-size: 2em;
+}
+
+.edit{
+    float: right;
+    font-size: 1.6em;
 }
 
 div.postContents {
@@ -260,6 +262,11 @@ div.postContents {
 
 .account{
     text-align: center;
+    position: relative;
+    top: 20px;
+    width: 80%;
+    max-width: 1260px;
+    margin: auto;
 }
 .account label{
     font-size: 1.2em;

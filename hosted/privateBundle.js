@@ -35,6 +35,11 @@ var renderPostList = function renderPostList() {
         " ",
         post.contents,
         " "
+      ),
+      React.createElement(
+        "a",
+        { className: "edit", href: "/edit/" + post._id },
+        "Edit"
       )
     );
   });

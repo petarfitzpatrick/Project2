@@ -45,10 +45,10 @@ var renderPost = function renderPost() {
       { htmlFor: "contents" },
       "Contents: "
     ),
-    React.createElement("input", { id: "postContents", type: "text", name: "contents", placeholder: "Post Contents" }),
+    React.createElement("textarea", { id: "postContents", rows: "10", type: "text", name: "contents", placeholder: "Post Contents" }),
     React.createElement("p", null),
     React.createElement("input", { type: "hidden", name: "_csrf", value: this.props.csrf }),
-    React.createElement("input", { className: "makePostSubmit", type: "submit", value: "Make Post" })
+    React.createElement("button", { className: "makePostSubmit btn btn-lg", bsStyle: "primary", type: "submit", value: "Make Post" })
   );
 };
 
@@ -75,6 +75,11 @@ var renderPostList = function renderPostList() {
         " ",
         post.name,
         " "
+      ),
+      React.createElement(
+        "a",
+        { className: "edit", href: "/edit/" + post._id },
+        "Edit"
       )
     );
   });

@@ -34,10 +34,10 @@ const renderPost = function() {
       <input id="postName" type="text" name="name" placeholder="Post Name"/>
       <p></p>
       <label htmlFor="contents">Contents: </label>
-      <input id="postContents" type="text" name="contents" placeholder="Post Contents"/>
+      <textarea id="postContents" rows="10" type="text" name="contents" placeholder="Post Contents"/>
       <p></p>
       <input type="hidden" name="_csrf" value={this.props.csrf} />
-      <input className="makePostSubmit" type="submit" value="Make Post" />
+      <button className="makePostSubmit btn btn-lg" bsStyle="primary" type="submit" value="Make Post" />
     </form>
   );
 };
@@ -50,11 +50,13 @@ const renderPostList = function() {
       </div>
     );
   }
+      
 
   const postNodes = this.state.data.map(function(post) {
     return (
       <div key={post._id} className="post">
         <h3 className="postName"> {post.name} </h3>
+        <a className="edit" href={"/edit/" + post._id}>Edit</a>
       </div>
     );
   });
