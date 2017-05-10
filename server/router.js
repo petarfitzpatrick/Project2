@@ -19,6 +19,8 @@ const router = (app) => {
   app.get('/private', mid.requiresLogin, controllers.Post.privatePage);
   app.post('/maker', mid.requiresLogin, controllers.Post.make);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  app.get('/edit/:id', mid.requiresSecure, controllers.Post.editPost);
+  app.get('/getPost/:id', mid.requiresSecure, controllers.Post.getPost)
   app.get('/*', (req, res) => {
     res.render('notFound', { error: 'The page does not exist' });
   });

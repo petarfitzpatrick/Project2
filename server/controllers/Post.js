@@ -71,9 +71,39 @@ const getPosts = (request, response) => {
   });
 };
 
+const getAccountInfo = (request, response) => {
+  response.json({ account: request.session.account });
+};
+
+
+const editPost = (request, response) => {
+    
+  Post.PostModel.findById(request.params.id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return response.status(400).json({ error: 'An error occured' });
+    }
+    
+  response.render('editPage', { csrfToken: request.csrfToken(), post: docs });
+  });
+};
+
+const getPost = (request, response) => {
+    Post.PostModel.findById(request.params.id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return response.status(400).json({ error: 'An error occured' });
+    }
+        
+    return response.json({post: docs});
+    });
+}
+
 module.exports.makerPage = makerPage;
 module.exports.rosterPage = rosterPage;
 module.exports.privatePage = privatePage;
 module.exports.getPosts = getPosts;
 module.exports.getAllPosts = getAllPosts;
 module.exports.make = makePost;
+module.exports.editPost = editPost;
+module.exports.getPost = getPost;

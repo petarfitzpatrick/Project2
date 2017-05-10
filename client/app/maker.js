@@ -37,7 +37,7 @@ const renderPost = function() {
       <textarea id="postContents" rows="10" type="text" name="contents" placeholder="Post Contents"/>
       <p></p>
       <input type="hidden" name="_csrf" value={this.props.csrf} />
-      <button className="makePostSubmit btn btn-lg" bsStyle="primary" type="submit" value="Make Post" />
+      <button className="makePostSubmit btn btn-lg" type="submit" value="Make Post">Make Post</button>
     </form>
   );
 };

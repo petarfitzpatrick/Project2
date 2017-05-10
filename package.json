@@ -18,6 +18,7 @@
     "watchLoginBundle": "babel --watch ./client/login ./client/helper --presets react --out-file ./hosted/loginBundle.js",
     "watchAppBundle": "babel --watch ./client/app ./client/helper --presets react --out-file ./hosted/bundle.js",
     "watchRosterBundle": "babel --watch ./client/roster ./client/helper --presets react --out-file ./hosted/rosterBundle.js",
+    "watchEditBundle": "babel --watch ./client/edit ./client/helper --presets react --out-file ./hosted/editBundle.js",
     "nodemon": "nodemon --watch ./server ./server/app.js",
     "start": "node ./server/app.js",
     "pretest": "eslint ./server --fix",
