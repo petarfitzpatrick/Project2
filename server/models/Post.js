@@ -48,12 +48,10 @@ PostSchema.statics.toAPI = (doc) => ({
 });
 
 PostSchema.statics.findByOwner = (ownerId, callback) => {
-    console.log("hnng" + ownerId);
   const search = {
     owner: convertId(ownerId),
   };
 
-    console.log("hnng" + search);
   return PostModel.find(search).select('name contents board').exec(callback);
 };
 
