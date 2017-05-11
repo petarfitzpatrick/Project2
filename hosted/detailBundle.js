@@ -1,23 +1,10 @@
 "use strict";
 
-var postRenderer = void 0;
-var postForm = void 0;
-var PostFormClass = void 0;
-var PostListClass = void 0;
+var EditPassClass = void 0;
+var formRenderer = void 0;
+var postId = void 0;
 
-var renderPostList = function renderPostList() {
-  if (this.state.data.length === 0) {
-    return React.createElement(
-      "div",
-      { className: "postList" },
-      React.createElement(
-        "h3",
-        { className: "emptyPost" },
-        "No Posts yet"
-      )
-    );
-  }
-
+var renderPost = function renderPost() {
   var postNodes = this.state.data.map(function (post) {
     return React.createElement(
       "div",
@@ -30,40 +17,50 @@ var renderPostList = function renderPostList() {
         " "
       ),
       React.createElement(
-        "a",
-        { className: "edit", href: "/detail/" + post._id },
-        "View"
+        "h3",
+        { className: "postContents" },
+        " ",
+        post.contents,
+        " "
       )
     );
   });
 
   return React.createElement(
     "div",
-    { className: "postList" },
-    postNodes
+    { id: "posts" },
+    React.createElement(
+      "div",
+      { className: "postList" },
+      postNodes
+    )
   );
 };
 
 var setup = function setup(csrf) {
+  postId = document.querySelector('#postId').innerHTML;
+  console.log(postId);
+  EditPassClass = React.createClass({
+    displayName: "EditPassClass",
 
-  PostListClass = React.createClass({
-    displayName: "PostListClass",
-
-    loadPostsFromServer: function loadPostsFromServer() {
-      sendAjax('GET', '/getAllPosts', null, function (data) {
-        this.setState({ data: data.posts });
+    loadAccount: function loadAccount() {
+      sendAjax('GET', '/getPost/' + postId, null, function (data) {
+        console.log("Pre");
+        var post = [data.post];
+        console.log("Post");
+        this.setState({ data: post });
       }.bind(this));
     },
     getInitialState: function getInitialState() {
       return { data: [] };
     },
     componentDidMount: function componentDidMount() {
-      this.loadPostsFromServer();
+      this.loadAccount();
     },
-    render: renderPostList
+    render: renderPost
   });
 
-  postRenderer = ReactDOM.render(React.createElement(PostListClass, null), document.querySelector("#posts"));
+  formRenderer = ReactDOM.render(React.createElement(EditPassClass, { csrf: csrf }), document.querySelector("#changeForm"));
 };
 
 var getToken = function getToken() {

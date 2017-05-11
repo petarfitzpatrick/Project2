@@ -51,7 +51,6 @@ const getAllPosts = (req, res) => Post.PostModel.findByBoard('general', (err, do
     console.log(err);
     return res.status(400).json({ error: 'An error occurred' });
   }
-  console.log(docs);
   return res.json({ posts: docs });
 });
 
@@ -71,55 +70,61 @@ const getPosts = (request, response) => {
   });
 };
 
-const getAccountInfo = (request, response) => {
-  response.json({ account: request.session.account });
-};
-
-
-const editPost = (request, response) => {
-    
+const detailPost = (request, response) => {
   Post.PostModel.findById(request.params.id, (err, docs) => {
     if (err) {
       console.log(err);
       return response.status(400).json({ error: 'An error occured' });
     }
-    
-  response.render('editPage', { csrfToken: request.csrfToken(), post: docs });
+
+    return response.render('detailPage', { csrfToken: request.csrfToken(), post: docs });
   });
 };
 
-const getPost = (request, response) => {
-    Post.PostModel.findById(request.params.id, (err, docs) => {
+const editPost = (request, response) => {
+  Post.PostModel.findById(request.params.id, (err, docs) => {
     if (err) {
       console.log(err);
       return response.status(400).json({ error: 'An error occured' });
     }
-        
-    return response.json({post: docs});
-    });
-}
 
-const finishEditPost = (request, response) => {
-    return Post.PostModel.findById(request.params.id, (err, docs)=>{
-        if (err){
-            return response.status(400).json({ error: 'Error!' });
-        }
-        
-        updatedPost = docs;
-        
-        //Only 2 editable for now
-        updatedPost.name = request.body.name;
-        updatedPost.contents = request.body.contents;
-        
-        const savePromise = updatedPost.save();
-        
-        savePromise.then(() => response.json({
-            name: updatedPost.name,
-            contents: updatedPost.contents
-        }));
-        savePromise.catch((saveErr) => response.json({ saveErr }));
-    })
-}
+    return response.render('editPage', { csrfToken: request.csrfToken(), post: docs });
+  });
+};
+
+const getPost = (request, response) => {
+  Post.PostModel.findById(request.params.id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return response.status(400).json({ error: 'An error occured' });
+    }
+
+    return response.json({ post: docs });
+  });
+};
+
+const finishEditPost = (request, response) =>
+Post.PostModel.findById(request.params.id, (err, docs) => {
+  if (err) {
+    return response.status(400).json({ error: 'Error!' });
+  }
+
+  const updatedPost = docs;
+
+        // Only 2 editable for now
+  updatedPost.name = request.body.name;
+  updatedPost.contents = request.body.contents;
+
+  const savePromise = updatedPost.save();
+
+  savePromise.then(() => response.json({
+    name: updatedPost.name,
+    contents: updatedPost.contents,
+  }));
+  savePromise.catch((saveErr) => response.json({ saveErr }));
+
+  return response.json({ docs });
+});
 
 module.exports.makerPage = makerPage;
 module.exports.rosterPage = rosterPage;
@@ -127,6 +132,7 @@ module.exports.privatePage = privatePage;
 module.exports.getPosts = getPosts;
 module.exports.getAllPosts = getAllPosts;
 module.exports.make = makePost;
+module.exports.detailPost = detailPost;
 module.exports.editPost = editPost;
 module.exports.getPost = getPost;
 module.exports.finishEditPost = finishEditPost;

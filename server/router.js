@@ -18,10 +18,11 @@ const router = (app) => {
   app.get('/roster', mid.requiresLogin, controllers.Post.rosterPage);
   app.get('/private', mid.requiresLogin, controllers.Post.privatePage);
   app.post('/maker', mid.requiresLogin, controllers.Post.make);
-  app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  app.get('/detail/:id', mid.requiresSecure, controllers.Post.detailPost);
   app.get('/edit/:id', mid.requiresSecure, controllers.Post.editPost);
   app.post('/editPost/:id', mid.requiresSecure, controllers.Post.finishEditPost);
-  app.get('/getPost/:id', mid.requiresSecure, controllers.Post.getPost)
+  app.get('/getPost/:id', mid.requiresSecure, controllers.Post.getPost);
+  app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.get('/*', (req, res) => {
     res.render('notFound', { error: 'The page does not exist' });
   });

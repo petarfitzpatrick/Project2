@@ -57,11 +57,6 @@ const setup = function (csrf) {
   EditPassClass = React.createClass({
     handleSubmit: handleEdit,
     loadAccount: function() {
-      console.log(postId);
-        /*sendAjax('GET', '/getAccountInfo', null, function(data) {
-        let account = [data.account];
-        this.setState({data:account})
-      }.bind(this));*/
       sendAjax('GET', '/getPost/' + postId, null, function(data) {
           console.log("Pre");
         let post = [data.post];

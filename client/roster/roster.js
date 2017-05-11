@@ -16,6 +16,7 @@ const renderPostList = function() {
     return (
       <div key={post._id} className="post">
         <h3 className="postName"> {post.name} </h3>
+        <a className="edit" href={"/detail/" + post._id}>View</a>
       </div>
     );
   });
@@ -26,6 +27,7 @@ const renderPostList = function() {
     </div>
   );
 };
+
 
 const setup = function(csrf) {
 
