@@ -88,8 +88,8 @@ nav:nth-child(1) {
 .makePostSubmit {
     transition: background-color 0.4s ease;
     display: inline;
-    width: 90px;
-    background-color: #E26A6A;
+
+    background-color: #FF9666;
     border-radius: 2px;
     color: white;
     text-decoration: none;
@@ -101,7 +101,7 @@ nav:nth-child(1) {
 
 .makePostSubmit:hover {
     transition: background-color 0.4s ease;
-    background-color: #174C4F;
+    background-color: #FFE184;
 }
 
 .mainForm {

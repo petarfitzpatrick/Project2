@@ -7,16 +7,10 @@ var postId = void 0;
 var handleEdit = function handleEdit(e) {
   e.preventDefault();
 
-  if ($("#accountName").val() == '' || $("#currentPass").val() == '' || $("#newPass").val() == '' || $("#newPass2").val() == '') {
-    console.log("All fields are required");
-    return false;
-  }
+  var action = $("#postForm").attr("action") + "/" + postId;
+  console.log(action);
 
-  if ($("#newPass").val() !== $("#newPass2").val()) {
-    return false;
-  }
-
-  sendAjax('POST', $("#accountForm").attr("action"), $("#accountForm").serialize(), function () {
+  sendAjax('POST', action, $("#postForm").serialize(), function () {
     window.location.reload();
   });
 
@@ -24,14 +18,13 @@ var handleEdit = function handleEdit(e) {
 };
 
 var renderEditForm = function renderEditForm() {
+  //Please look at what you did for changepass in p2
+  //Create a similar renderform here
+  //Then similar to account, create a post in posts (lol)
   var editForm = this.state.data.map(function (post) {
     return React.createElement(
-      "form",
-      { id: "postForm",
-        name: "postForm",
-        method: "POST",
-        className: "postForm"
-      },
+      "div",
+      null,
       React.createElement(
         "label",
         { htmlFor: "name" },
@@ -54,7 +47,6 @@ var renderEditForm = function renderEditForm() {
         post.contents
       ),
       React.createElement("p", null),
-      React.createElement("input", { type: "hidden", name: "_csrf" }),
       React.createElement(
         "button",
         { className: "makePostSubmit btn btn-lg", type: "submit", value: "Make Post" },
@@ -62,10 +54,22 @@ var renderEditForm = function renderEditForm() {
       )
     );
   });
+
   return React.createElement(
     "div",
     null,
-    editForm
+    React.createElement(
+      "form",
+      { id: "postForm",
+        onSubmit: this.handleSubmit,
+        name: "postForm",
+        method: "POST",
+        action: "/editPost",
+        className: "postForm"
+      },
+      React.createElement("input", { type: "hidden", name: "_csrf", value: this.props.csrf }),
+      editForm
+    )
   );
 };
 
@@ -131,6 +135,7 @@ var sendAjax = function sendAjax(type, action, data, success) {
     dataType: "json",
     success: success,
     error: function error(xhr, status, _error) {
+      console.log(xhr.responseText);
       var messageObj = JSON.parse(xhr.responseText);
       handleError(messageObj.error);
     }

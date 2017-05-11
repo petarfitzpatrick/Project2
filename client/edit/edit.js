@@ -5,16 +5,10 @@ let postId;
 const handleEdit = function (e) {
   e.preventDefault();
 
-  if ($("#accountName").val() == '' || $("#currentPass").val() == '' || $("#newPass").val() == '' || $("#newPass2").val() == '') {
-    console.log("All fields are required")
-    return false;
-  }
-
-  if ($("#newPass").val() !== $("#newPass2").val()) {
-    return false;
-  }
-
-  sendAjax('POST', $("#accountForm").attr("action"), $("#accountForm").serialize(), function() {
+  var action = $("#postForm").attr("action") + "/" + postId;
+  console.log(action);
+    
+  sendAjax('POST', action, $("#postForm").serialize(), function() {
     window.location.reload();
   });
 
@@ -22,28 +16,38 @@ const handleEdit = function (e) {
 };
 
 const renderEditForm = function () {
+    //Please look at what you did for changepass in p2
+    //Create a similar renderform here
+    //Then similar to account, create a post in posts (lol)
     const editForm = this.state.data.map(function(post){
   return (
-<form id="postForm"
-      name="postForm"
-      method="POST"
-      className="postForm"
-    >
+      <div>
       <label htmlFor="name">Name:</label>
       <textarea id="postName" type="text" rows="1" name="name" placeholder="Post Name">{post.name}</textarea>
       <p></p>
       <label htmlFor="contents">Contents: </label>
       <textarea id="postContents" rows="10" type="text" name="contents" placeholder="Post Contents">{post.contents}</textarea>
       <p></p>
-      <input type="hidden" name="_csrf"/>
       <button className="makePostSubmit btn btn-lg" type="submit" value="Make Post">Make Post</button>
-   </form>
+      </div>
   );
 });
-    return(
+    
+    
+return(
 <div>
+      <form id="postForm"
+      onSubmit={this.handleSubmit}
+      name="postForm"
+      method="POST"
+      action="/editPost"
+      className="postForm"
+    >
+        <input type="hidden" name="_csrf" value={this.props.csrf}/>
         {editForm}
+    </form>
 </div>
+
     );
 };
 

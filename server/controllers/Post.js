@@ -99,6 +99,28 @@ const getPost = (request, response) => {
     });
 }
 
+const finishEditPost = (request, response) => {
+    return Post.PostModel.findById(request.params.id, (err, docs)=>{
+        if (err){
+            return response.status(400).json({ error: 'Error!' });
+        }
+        
+        updatedPost = docs;
+        
+        //Only 2 editable for now
+        updatedPost.name = request.body.name;
+        updatedPost.contents = request.body.contents;
+        
+        const savePromise = updatedPost.save();
+        
+        savePromise.then(() => response.json({
+            name: updatedPost.name,
+            contents: updatedPost.contents
+        }));
+        savePromise.catch((saveErr) => response.json({ saveErr }));
+    })
+}
+
 module.exports.makerPage = makerPage;
 module.exports.rosterPage = rosterPage;
 module.exports.privatePage = privatePage;
@@ -107,3 +129,4 @@ module.exports.getAllPosts = getAllPosts;
 module.exports.make = makePost;
 module.exports.editPost = editPost;
 module.exports.getPost = getPost;
+module.exports.finishEditPost = finishEditPost;
