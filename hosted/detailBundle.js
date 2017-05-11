@@ -22,6 +22,13 @@ var renderPost = function renderPost() {
         " ",
         post.contents,
         " "
+      ),
+      React.createElement(
+        "div",
+        { className: "board" },
+        "Board: ",
+        post.board,
+        " "
       )
     );
   });

@@ -48,19 +48,24 @@ PostSchema.statics.toAPI = (doc) => ({
 });
 
 PostSchema.statics.findByOwner = (ownerId, callback) => {
+    console.log("hnng" + ownerId);
   const search = {
     owner: convertId(ownerId),
   };
 
+    console.log("hnng" + search);
   return PostModel.find(search).select('name contents board').exec(callback);
 };
 
-PostSchema.statics.findByBoard = (ownerId, callback) =>
-  // const search = {
-  //  owner: convertId(ownerId),
-  // };
+PostSchema.statics.findByBoard = (searchTerm, callback) =>{
 
-   PostModel.find(ownerId).select('name contents board').exec(callback);
+   PostModel.find({board: searchTerm}).select('name contents board').exec(callback);
+};
+
+PostSchema.statics.findEveryPost = (searchTerm, callback) =>{
+
+   PostModel.find({}).select('name contents board').exec(callback);
+};
 
 PostModel = mongoose.model('Post', PostSchema);
 

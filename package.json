@@ -20,6 +20,7 @@
     "watchRosterBundle": "babel --watch ./client/roster ./client/helper --presets react --out-file ./hosted/rosterBundle.js",
     "watchEditBundle": "babel --watch ./client/edit ./client/helper --presets react --out-file ./hosted/editBundle.js",
     "watchDetailBundle": "babel --watch ./client/detail ./client/helper --presets react --out-file ./hosted/detailBundle.js",
+    "watchSearchBundle": "babel --watch ./client/search ./client/helper --presets react --out-file ./hosted/searchBundle.js",
     "nodemon": "nodemon --watch ./server ./server/app.js",
     "start": "node ./server/app.js",
     "pretest": "eslint ./server --fix",

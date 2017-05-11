@@ -4,64 +4,7 @@ var postRenderer = void 0;
 var postForm = void 0;
 var PostFormClass = void 0;
 var PostListClass = void 0;
-
-var handlePost = function handlePost(e) {
-
-  e.preventDefault();
-
-  $("#postMessage").animate({ width: 'hide' }, 350);
-
-  if ($("#postName").val() == '' || $("#postContents").val() == '') {
-    handleError("All fields are required");
-    return false;
-  }
-
-  sendAjax('POST', $("#postForm").attr("action"), $("#postForm").serialize(), function () {
-    postRenderer.loadPostsFromServer();
-  });
-
-  return false;
-};
-
-var renderPost = function renderPost() {
-  return React.createElement(
-    "form",
-    { id: "postForm",
-      onSubmit: this.handleSubmit,
-      name: "postForm",
-      action: "/maker",
-      method: "POST",
-      className: "postForm"
-    },
-    React.createElement(
-      "label",
-      { htmlFor: "name" },
-      "Name: "
-    ),
-    React.createElement("input", { id: "postName", type: "text", name: "name", placeholder: "Post Name" }),
-    React.createElement("p", null),
-    React.createElement(
-      "label",
-      { htmlFor: "contents" },
-      "Contents: "
-    ),
-    React.createElement("textarea", { id: "postContents", rows: "10", type: "text", name: "contents", placeholder: "Post Contents" }),
-    React.createElement("p", null),
-    React.createElement(
-      "label",
-      { htmlFor: "board" },
-      "Board: "
-    ),
-    React.createElement("input", { id: "postBoard", type: "text", name: "name", placeholder: "General" }),
-    React.createElement("p", null),
-    React.createElement("input", { type: "hidden", name: "_csrf", value: this.props.csrf }),
-    React.createElement(
-      "button",
-      { className: "makePostSubmit btn btn-lg", type: "submit", value: "Make Post" },
-      "Make Post"
-    )
-  );
-};
+var term = void 0;
 
 var renderPostList = function renderPostList() {
   if (this.state.data.length === 0) {
@@ -88,9 +31,16 @@ var renderPostList = function renderPostList() {
         " "
       ),
       React.createElement(
+        "div",
+        { className: "board" },
+        "Board: ",
+        post.board,
+        " "
+      ),
+      React.createElement(
         "a",
-        { className: "edit", href: "/edit/" + post._id },
-        "Edit"
+        { className: "edit", href: "/detail/" + post._id },
+        "View"
       )
     );
   });
@@ -103,18 +53,13 @@ var renderPostList = function renderPostList() {
 };
 
 var setup = function setup(csrf) {
-  PostFormClass = React.createClass({
-    displayName: "PostFormClass",
-
-    handleSubmit: handlePost,
-    render: renderPost
-  });
-
+  term = document.querySelector('#term').innerHTML;
+  console.log(term);
   PostListClass = React.createClass({
     displayName: "PostListClass",
 
     loadPostsFromServer: function loadPostsFromServer() {
-      sendAjax('GET', '/getPosts', null, function (data) {
+      sendAjax('GET', '/searchPosts/' + term, null, function (data) {
         this.setState({ data: data.posts });
       }.bind(this));
     },
@@ -126,8 +71,6 @@ var setup = function setup(csrf) {
     },
     render: renderPostList
   });
-
-  postForm = ReactDOM.render(React.createElement(PostFormClass, { csrf: csrf }), document.querySelector("#makePost"));
 
   postRenderer = ReactDOM.render(React.createElement(PostListClass, null), document.querySelector("#posts"));
 };

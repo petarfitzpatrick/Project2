@@ -18,9 +18,6 @@ var handleEdit = function handleEdit(e) {
 };
 
 var renderEditForm = function renderEditForm() {
-  //Please look at what you did for changepass in p2
-  //Create a similar renderform here
-  //Then similar to account, create a post in posts (lol)
   var editForm = this.state.data.map(function (post) {
     return React.createElement(
       "div",
@@ -50,7 +47,7 @@ var renderEditForm = function renderEditForm() {
       React.createElement(
         "button",
         { className: "makePostSubmit btn btn-lg", type: "submit", value: "Make Post" },
-        "Make Post"
+        "Save"
       )
     );
   });
@@ -81,11 +78,6 @@ var setup = function setup(csrf) {
 
     handleSubmit: handleEdit,
     loadAccount: function loadAccount() {
-      console.log(postId);
-      /*sendAjax('GET', '/getAccountInfo', null, function(data) {
-      let account = [data.account];
-      this.setState({data:account})
-      }.bind(this));*/
       sendAjax('GET', '/getPost/' + postId, null, function (data) {
         console.log("Pre");
         var post = [data.post];
@@ -135,7 +127,6 @@ var sendAjax = function sendAjax(type, action, data, success) {
     dataType: "json",
     success: success,
     error: function error(xhr, status, _error) {
-      console.log(xhr.responseText);
       var messageObj = JSON.parse(xhr.responseText);
       handleError(messageObj.error);
     }

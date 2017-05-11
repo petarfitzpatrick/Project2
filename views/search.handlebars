@@ -28,9 +28,10 @@
         <input id="searchInfo" type="text"/>
         <input id="searchButton" class="btn btn-default" type="submit" value="Submit"/>
   </div>
+  <div id="term" style="display:none">{{term}}</div>
   <section id="posts">
   </section>
-  <script src="/assets/rosterBundle.js"></script>
+  <script src="/assets/searchBundle.js"></script>
   <script>
       var searchButton = document.getElementById('searchButton');
       searchButton.onclick = function(){

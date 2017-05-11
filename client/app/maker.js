@@ -36,6 +36,9 @@ const renderPost = function() {
       <label htmlFor="contents">Contents: </label>
       <textarea id="postContents" rows="10" type="text" name="contents" placeholder="Post Contents"/>
       <p></p>
+      <label htmlFor="board">Board: </label>
+      <input id="postBoard" type="text" name="name" placeholder="General"/>
+      <p></p>
       <input type="hidden" name="_csrf" value={this.props.csrf} />
       <button className="makePostSubmit btn btn-lg" type="submit" value="Make Post">Make Post</button>
     </form>

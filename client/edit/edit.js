@@ -16,9 +16,6 @@ const handleEdit = function (e) {
 };
 
 const renderEditForm = function () {
-    //Please look at what you did for changepass in p2
-    //Create a similar renderform here
-    //Then similar to account, create a post in posts (lol)
     const editForm = this.state.data.map(function(post){
   return (
       <div>
@@ -28,7 +25,7 @@ const renderEditForm = function () {
       <label htmlFor="contents">Contents: </label>
       <textarea id="postContents" rows="10" type="text" name="contents" placeholder="Post Contents">{post.contents}</textarea>
       <p></p>
-      <button className="makePostSubmit btn btn-lg" type="submit" value="Make Post">Make Post</button>
+      <button className="makePostSubmit btn btn-lg" type="submit" value="Make Post">Save</button>
       </div>
   );
 });

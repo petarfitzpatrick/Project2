@@ -37,6 +37,13 @@ var renderPostList = function renderPostList() {
         " "
       ),
       React.createElement(
+        "div",
+        { className: "board" },
+        "Board: ",
+        post.board,
+        " "
+      ),
+      React.createElement(
         "a",
         { className: "edit", href: "/edit/" + post._id },
         "Edit"

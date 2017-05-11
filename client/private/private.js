@@ -17,6 +17,7 @@ const renderPostList = function() {
       <div key={post._id} className="post">
         <h3 className="postName"> {post.name} </h3>
         <h3 className="postContents"> {post.contents} </h3>
+        <div className="board">Board: {post.board} </div>
         <a className="edit" href={"/edit/" + post._id}>Edit</a>
       </div>
     );

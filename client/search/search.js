@@ -2,6 +2,7 @@ let postRenderer;
 let postForm;
 let PostFormClass;
 let PostListClass;
+let term;
 
 const renderPostList = function() {
   if(this.state.data.length === 0) {
@@ -31,10 +32,11 @@ const renderPostList = function() {
 
 
 const setup = function(csrf) {
-
+  term = document.querySelector('#term').innerHTML;
+  console.log(term);
   PostListClass = React.createClass({
     loadPostsFromServer: function() {
-      sendAjax('GET', '/getAllPosts', null, function(data) {
+      sendAjax('GET', '/searchPosts/' + term, null, function(data) {
         this.setState({data:data.posts});
       }.bind(this));
     },

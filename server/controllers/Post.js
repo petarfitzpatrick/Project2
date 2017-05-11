@@ -7,12 +7,13 @@ const makePost = (req, res) => {
   if (!req.body.name || !req.body.contents) {
     return res.status(400).json({ error: 'Post needs a title and body' });
   }
-
+    
+    
   const postData = {
-    name: req.body.name,
+    name: req.body.name[0],
     contents: req.body.contents,
     owner: req.session.account._id,
-    board: req.session.board,
+    board: req.body.name[1],
   };
 
   const newPost = new Post.PostModel(postData);
@@ -46,11 +47,25 @@ const makerPage = (req, res) => {
 
 const rosterPage = (req, res) => res.render('roster', { csrfToken: req.csrfToken() });
 
-const getAllPosts = (req, res) => Post.PostModel.findByBoard('general', (err, docs) => {
+const searchPage = (req, res) => {
+    console.log(req.params.term);
+    res.render('search', { csrfToken: req.csrfToken(), term: req.params.term});
+}
+
+const getAllPosts = (req, res) => Post.PostModel.findEveryPost('general', (err, docs) => {
   if (err) {
     console.log(err);
     return res.status(400).json({ error: 'An error occurred' });
   }
+  return res.json({ posts: docs });
+});
+
+const searchAllPosts = (req, res) => Post.PostModel.findByBoard(req.params.term, (err, docs) => {
+  if (err) {
+    console.log(err);
+    return res.status(400).json({ error: 'An error occurred' });
+  }
+    console.log(req.params.term);
   return res.json({ posts: docs });
 });
 
@@ -111,7 +126,6 @@ Post.PostModel.findById(request.params.id, (err, docs) => {
 
   const updatedPost = docs;
 
-        // Only 2 editable for now
   updatedPost.name = request.body.name;
   updatedPost.contents = request.body.contents;
 
@@ -129,8 +143,10 @@ Post.PostModel.findById(request.params.id, (err, docs) => {
 module.exports.makerPage = makerPage;
 module.exports.rosterPage = rosterPage;
 module.exports.privatePage = privatePage;
+module.exports.searchPage = searchPage;
 module.exports.getPosts = getPosts;
 module.exports.getAllPosts = getAllPosts;
+module.exports.searchAllPosts = searchAllPosts;
 module.exports.make = makePost;
 module.exports.detailPost = detailPost;
 module.exports.editPost = editPost;
