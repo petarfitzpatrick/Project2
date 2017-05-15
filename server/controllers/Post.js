@@ -7,8 +7,8 @@ const makePost = (req, res) => {
   if (!req.body.name || !req.body.contents) {
     return res.status(400).json({ error: 'Post needs a title and body' });
   }
-    
-    
+
+
   const postData = {
     name: req.body.name[0],
     contents: req.body.contents,
@@ -48,9 +48,9 @@ const makerPage = (req, res) => {
 const rosterPage = (req, res) => res.render('roster', { csrfToken: req.csrfToken() });
 
 const searchPage = (req, res) => {
-    console.log(req.params.term);
-    res.render('search', { csrfToken: req.csrfToken(), term: req.params.term});
-}
+  console.log(req.params.term);
+  res.render('search', { csrfToken: req.csrfToken(), term: req.params.term });
+};
 
 const getAllPosts = (req, res) => Post.PostModel.findEveryPost('general', (err, docs) => {
   if (err) {
@@ -65,7 +65,7 @@ const searchAllPosts = (req, res) => Post.PostModel.findByBoard(req.params.term,
     console.log(err);
     return res.status(400).json({ error: 'An error occurred' });
   }
-    console.log(req.params.term);
+  console.log(req.params.term);
   return res.json({ posts: docs });
 });
 

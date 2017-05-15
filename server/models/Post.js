@@ -55,14 +55,12 @@ PostSchema.statics.findByOwner = (ownerId, callback) => {
   return PostModel.find(search).select('name contents board').exec(callback);
 };
 
-PostSchema.statics.findByBoard = (searchTerm, callback) =>{
-
-   PostModel.find({board: searchTerm}).select('name contents board').exec(callback);
+PostSchema.statics.findByBoard = (searchTerm, callback) => {
+  PostModel.find({ board: searchTerm }).select('name contents board').exec(callback);
 };
 
-PostSchema.statics.findEveryPost = (searchTerm, callback) =>{
-
-   PostModel.find({}).select('name contents board').exec(callback);
+PostSchema.statics.findEveryPost = (searchTerm, callback) => {
+  PostModel.find({}).select('name contents board').exec(callback);
 };
 
 PostModel = mongoose.model('Post', PostSchema);

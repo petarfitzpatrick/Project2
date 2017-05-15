@@ -150,7 +150,7 @@ nav:nth-child(1) {
 
 .formSubmit:hover {
     transition: background-color 0.4s ease;
-    background-color: #E26A6A;
+    background-color: #FF9666;
 }
 
 #user, #pass, #pass2 {
